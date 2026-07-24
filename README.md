@@ -1,9 +1,11 @@
 # 🌊 ABYSS — 3D Ocean Exploration Experience
 
+[![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-hackoceanabyss3d.vercel.app-00b4d8?style=for-the-badge&logo=vercel&logoColor=white)](https://hackoceanabyss3d.vercel.app/)
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Three.js](https://img.shields.io/badge/Three.js-000000?style=for-the-badge&logo=three.js&logoColor=white)](https://threejs.org/)
 [![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-[![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://vercel.com/)
+
+🌐 **Live Deployment**: [https://hackoceanabyss3d.vercel.app/](https://hackoceanabyss3d.vercel.app/)
 
 > **"An immersive, scroll-driven 3D web voyage that turns digital browsing into a cinematic deep-sea expedition."**
 
