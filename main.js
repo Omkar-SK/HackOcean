@@ -40,7 +40,7 @@ let lastBubbleTime = 0
 function spawnMouseBubble(x, y) {
   const bubble = document.createElement('div')
   bubble.className = 'cursor-bubble'
-  
+
   const size = Math.random() * 12 + 8 // 8px to 20px
   const driftX = (Math.random() - 0.5) * 35
 
