@@ -225,8 +225,8 @@ body {
   inset: 0;
   margin: -0.5rem;
   border-radius: 9999px;
-  background-color: #f3f4f6;
-  opacity: 0.4;
+  background-color: var(--blue-bright);
+  opacity: 0.3;
   filter: blur(16px);
   pointer-events: none;
   transition: all 0.3s ease-out;
@@ -251,8 +251,8 @@ body {
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
-  color: #000;
-  background: linear-gradient(to bottom right, #f3f4f6, #d1d5db);
+  color: var(--blue-abyss);
+  background: var(--blue-bright);
   border: none;
   border-radius: 9999px;
   cursor: pointer;
@@ -269,7 +269,7 @@ body {
 }
 
 .signup-button:hover {
-  background: linear-gradient(to bottom right, #e5e7eb, #9ca3af);
+  background: var(--blue-light);
 }
 
 .mobile-menu-toggle {
