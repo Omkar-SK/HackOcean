@@ -234,26 +234,36 @@ const seabedMat = new THREE.ShaderMaterial({
              n += sn(uv * 7.0)  * 0.16;
              n += sn(uv * 15.0) * 0.08;
              n += sn(uv * 31.0) * 0.04;
+             
+      // High-frequency rough texture
+      float rough = sn(uv * 100.0) * 0.15 + sn(uv * 300.0) * 0.05;
+      
       // Ripple lines — simulate underwater sand waves
       float ripple = sin(vWorldPos.x * 0.6 + vWorldPos.z * 0.4) * 0.5 + 0.5;
       ripple = pow(ripple, 3.0) * 0.18;
       n = clamp(n + ripple, 0.0, 1.0);
 
-      // Sandy colour palette
-      vec3 sandA = vec3(0.78, 0.64, 0.42); // warm dry sand
-      vec3 sandB = vec3(0.58, 0.46, 0.28); // dark wet sand
-      vec3 sandC = vec3(0.90, 0.78, 0.56); // bright highlight
+      // Dark bluish sand colour palette
+      vec3 sandA = vec3(0.12, 0.28, 0.45); // base dark blue
+      vec3 sandB = vec3(0.05, 0.15, 0.30); // deeper shadow blue
+      vec3 sandC = vec3(0.20, 0.40, 0.55); // blue highlight
       vec3 col = mix(sandB, sandA, n);
       col = mix(col, sandC, pow(n, 4.0) * 0.4);
+      
+      // Apply roughness to color
+      col *= 1.0 - rough;
+
+      // Perturb normal for roughness effect in lighting
+      vec3 modifiedNormal = normalize(vNormal + vec3(sn(uv * 80.0) * 0.2, 0.0, sn(uv * 80.0 + 15.0) * 0.2));
 
       // Directional diffuse light from above
-      float diff = max(dot(normalize(vNormal), normalize(vec3(0.2, 1.0, 0.3))), 0.0);
-      col *= 0.35 + diff * 0.65;
+      float diff = max(dot(modifiedNormal, normalize(vec3(0.2, 1.0, 0.3))), 0.0);
+      col *= 0.5 + diff * 0.6; // Keep it bright so sand color is visible
 
-      // Distance fog fade
+      // Distance fog fade - less aggressive so sand color isn't completely washed out
       float depth = gl_FragCoord.z / gl_FragCoord.w;
-      float fogF = smoothstep(uFogNear, uFogFar, depth);
-      col = mix(col, uFogColor, fogF);
+      float fogF = smoothstep(uFogNear, uFogFar * 1.5, depth);
+      col = mix(col, uFogColor, fogF * 0.6); // Reduced max fog opacity on the seabed
 
       gl_FragColor = vec4(col, 1.0);
     }
@@ -267,16 +277,16 @@ const seabedGeo = new THREE.PlaneGeometry(600, 600, 96, 96)
 const sbPos = seabedGeo.attributes.position
 for (let i = 0; i < sbPos.count; i++) {
   const x = sbPos.getX(i)
-  const z = sbPos.getZ(i)
-  const dune = fbm(x * 0.012, z * 0.012) * 5.0
-  const grain = fbm(x * 0.06, z * 0.06) * 0.8
-  sbPos.setY(i, Math.abs(dune) + grain)
+  const y = sbPos.getY(i) // PlaneGeometry is on the XY plane
+  const dune = fbm(x * 0.012, y * 0.012) * 2.0 // Gentler dunes
+  const grain = fbm(x * 0.1, y * 0.1) * 0.5
+  sbPos.setZ(i, Math.abs(dune) + grain) // Displace Z, which becomes World Y after rotation
 }
 seabedGeo.computeVertexNormals()
 
 const seabed = new THREE.Mesh(seabedGeo, seabedMat)
 seabed.rotation.x = -Math.PI / 2
-seabed.position.y = -18  // raised so it sits inside the camera's view frustum
+seabed.position.y = -22  // Lowered so it sits well below the camera and right beneath the rocks
 seabed.receiveShadow = true
 scene.add(seabed)
 
