@@ -500,7 +500,7 @@ scene.add(bubbles)
 // ─────────────────────────────────────────────────────────────
 
 const loader = new GLTFLoader()
-const loadedModels = {}
+const allMixers = []
 
 function tryLoadModel(name, onLoaded) {
   loader.load(
@@ -517,9 +517,12 @@ function tryLoadModel(name, onLoaded) {
           }
         }
       })
-      loadedModels[name] = { model, mixer: gltf.animations.length ? new THREE.AnimationMixer(model) : null, animations: gltf.animations }
-      if (loadedModels[name].mixer && gltf.animations[0]) {
-        loadedModels[name].mixer.clipAction(gltf.animations[0]).play()
+      if (gltf.animations && gltf.animations.length > 0) {
+        const mixer = new THREE.AnimationMixer(model)
+        const action = mixer.clipAction(gltf.animations[0])
+        action.time = Math.random() * gltf.animations[0].duration
+        action.play()
+        allMixers.push(mixer)
       }
       scene.add(model)
       onLoaded(model)
@@ -555,6 +558,29 @@ const modelConfigs = [
       m.rotation.y = 0.8 + Math.sin(t * 0.45) * 0.4
     },
   },
+  // ── Shark (prowling seabed near dolphin) ───────────────
+  {
+    file: 'shark.glb',
+    pos: [50, -100, -190],
+    rot: [0, 0, 0],
+    scale: [1.8, 1.8, 1.8],
+    animate: (m, t) => {
+      // Cruising near seabed around Dolphin depth (Z: -90, Y: -14.5)
+      const pathX = Math.sin(t * 0.25) * 12
+      const pathZ = -90 + Math.cos(t * 0.18) * 8
+      const pathY = -14.5 + Math.sin(t * 0.35) * 0.5
+
+      m.position.set(pathX, pathY, pathZ)
+
+      // Orient shark towards movement direction
+      const nextX = Math.sin((t + 0.1) * 0.25) * 12
+      const nextZ = -90 + Math.cos((t + 0.1) * 0.18) * 8
+      m.lookAt(nextX, pathY, nextZ)
+
+      // Flip upside-down GLTF model upright (rotateX 180 degrees)
+      m.rotateX(Math.PI)
+    },
+  },
   // ── Rocks on the seabed (scattered along the journey) ─────
   { file: 'rocks.glb', pos: [-8, -18, -15], rot: [0, 0.4, 0], scale: [2, 2, 2], animate: null },
   { file: 'rocks.glb', pos: [12, -18, -28], rot: [0, 1.8, 0], scale: [3, 3, 3], animate: null },
@@ -564,6 +590,68 @@ const modelConfigs = [
   { file: 'rocks.glb', pos: [22, -18, -95], rot: [0, 0.3, 0], scale: [2, 2, 2], animate: null },
   { file: 'rocks.glb', pos: [-15, -18, -110], rot: [0, 1.7, 0], scale: [2.8, 2.8, 2.8], animate: null },
   { file: 'rocks.glb', pos: [8, -18, -130], rot: [0, 2.1, 0], scale: [2.2, 2.2, 2.2], animate: null },
+
+  // ── Jellyfish Cluster on Seabed Ground at the End ("Ready to Descend?") ─────
+  {
+    file: 'jellyfish.glb',
+    pos: [-8, -15, -204],
+    rot: [0.1, 0.5, -0.08],
+    scale: [0.009, 0.009, 0.009],
+    animate: (m, t) => {
+      m.position.y = -15 + Math.sin(t * 0.45) * 0.4
+      m.rotation.z = -0.08 + Math.sin(t * 0.3) * 0.03
+    },
+  },
+  {
+    file: 'jellyfish.glb',
+    pos: [10, -14, -209],
+    rot: [-0.12, 1.8, 0.1],
+    scale: [0.011, 0.011, 0.011],
+    animate: (m, t) => {
+      m.position.y = -14 + Math.sin(t * 0.38 + 1.5) * 0.5
+      m.rotation.x = -0.12 + Math.cos(t * 0.35 + 1.0) * 0.04
+    },
+  },
+  {
+    file: 'jellyfish.glb',
+    pos: [-14, -16, -214],
+    rot: [0.15, 3.2, -0.15],
+    scale: [0.008, 0.008, 0.008],
+    animate: (m, t) => {
+      m.position.y = -16 + Math.sin(t * 0.52 + 2.8) * 0.35
+      m.rotation.z = -0.15 + Math.sin(t * 0.4 + 2.0) * 0.04
+    },
+  },
+  {
+    file: 'jellyfish.glb',
+    pos: [4, -13, -217],
+    rot: [-0.08, 4.5, 0.05],
+    scale: [0.012, 0.012, 0.012],
+    animate: (m, t) => {
+      m.position.y = -13 + Math.sin(t * 0.4 + 4.1) * 0.45
+      m.rotation.z = 0.05 + Math.cos(t * 0.32 + 3.5) * 0.03
+    },
+  },
+  {
+    file: 'jellyfish.glb',
+    pos: [-2, -17, -220],
+    rot: [0.18, 0.9, 0.12],
+    scale: [0.0095, 0.0095, 0.0095],
+    animate: (m, t) => {
+      m.position.y = -17 + Math.sin(t * 0.48 + 0.7) * 0.4
+      m.rotation.x = 0.18 + Math.sin(t * 0.35 + 0.5) * 0.03
+    },
+  },
+  {
+    file: 'jellyfish.glb',
+    pos: [14, -15, -223],
+    rot: [-0.15, 2.4, -0.1],
+    scale: [0.0105, 0.0105, 0.0105],
+    animate: (m, t) => {
+      m.position.y = -15 + Math.sin(t * 0.42 + 5.0) * 0.5
+      m.rotation.z = -0.1 + Math.sin(t * 0.38 + 4.2) * 0.04
+    },
+  },
 ]
 
 const modelAnimators = []
@@ -873,10 +961,8 @@ function animate(time) {
   // Animate model mesh helpers
   modelAnimators.forEach(item => item.fn(item.model, elapsedTime))
 
-  // Update loaded GLTF mixers
-  Object.values(loadedModels).forEach(m => {
-    if (m.mixer) m.mixer.update(0.016)
-  })
+  // Update loaded GLTF mixers for all models (all 6 jellyfish, dolphins, submarine, etc.)
+  allMixers.forEach(mixer => mixer.update(0.016))
 
   // Update procedural bubble stream rise
   const posAttr = bubbleGeo.attributes.position
