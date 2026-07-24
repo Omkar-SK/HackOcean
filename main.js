@@ -535,7 +535,7 @@ function tryLoadModel(name, onLoaded) {
 // Model configurations — ONLY files confirmed in /public/models/:
 // submarine.glb, dolphin.glb, rocks.glb, fish.glb
 const modelConfigs = [
-  // ── Submarine ────────────────────────────────────────
+  // ── Submarine 1 ────────────────────────────────────────
   {
     file: 'submarine.glb',
     pos: [40, -5, -30],
@@ -544,6 +544,17 @@ const modelConfigs = [
     animate: (m, t) => {
       m.position.y = -5 + Math.sin(t * 0.4) * 0.25
       m.rotation.z = Math.sin(t * 0.3) * 0.02
+    },
+  },
+  // ── Large Submarine 2 ───────────────────────────────────
+  {
+    file: 'submarine2.glb',
+    pos: [50, -6, -95],
+    rot: [0, -Math.PI * 0.75, 0],
+    scale: [4, 4, 4],
+    animate: (m, t) => {
+      m.position.y = -12 + Math.sin(t * 0.35 + 1.0) * 0.4
+      m.rotation.z = Math.sin(t * 0.25) * 0.03
     },
   },
   // ── Dolphin ────────────────────────────────────────
@@ -558,28 +569,13 @@ const modelConfigs = [
       m.rotation.y = 0.8 + Math.sin(t * 0.45) * 0.4
     },
   },
-  // ── Shark (prowling seabed near dolphin) ───────────────
+  // ── Sunken Plane Wreck on the Seabed ─────────────────
   {
-    file: 'shark.glb',
-    pos: [50, -100, -190],
-    rot: [0, 0, 0],
-    scale: [1.8, 1.8, 1.8],
-    animate: (m, t) => {
-      // Cruising near seabed around Dolphin depth (Z: -90, Y: -14.5)
-      const pathX = Math.sin(t * 0.25) * 12
-      const pathZ = -90 + Math.cos(t * 0.18) * 8
-      const pathY = -14.5 + Math.sin(t * 0.35) * 0.5
-
-      m.position.set(pathX, pathY, pathZ)
-
-      // Orient shark towards movement direction
-      const nextX = Math.sin((t + 0.1) * 0.25) * 12
-      const nextZ = -90 + Math.cos((t + 0.1) * 0.18) * 8
-      m.lookAt(nextX, pathY, nextZ)
-
-      // Flip upside-down GLTF model upright (rotateX 180 degrees)
-      m.rotateX(Math.PI)
-    },
+    file: 'plane.glb',
+    pos: [28, -17.5, -140],
+    rot: [0.15, -0.6, -0.1],
+    scale: [0.35, 0.35, 0.35],
+    animate: null,
   },
   // ── Rocks on the seabed (scattered along the journey) ─────
   { file: 'rocks.glb', pos: [-8, -18, -15], rot: [0, 0.4, 0], scale: [2, 2, 2], animate: null },
@@ -590,6 +586,8 @@ const modelConfigs = [
   { file: 'rocks.glb', pos: [22, -18, -95], rot: [0, 0.3, 0], scale: [2, 2, 2], animate: null },
   { file: 'rocks.glb', pos: [-15, -18, -110], rot: [0, 1.7, 0], scale: [2.8, 2.8, 2.8], animate: null },
   { file: 'rocks.glb', pos: [8, -18, -130], rot: [0, 2.1, 0], scale: [2.2, 2.2, 2.2], animate: null },
+
+  // ── Underwater Plants (dynamically populated below) ───────
 
   // ── Jellyfish Cluster on Seabed Ground at the End ("Ready to Descend?") ─────
   {
@@ -652,7 +650,118 @@ const modelConfigs = [
       m.rotation.z = -0.1 + Math.sin(t * 0.38 + 4.2) * 0.04
     },
   },
+  // ── Upper Jellyfish Cluster (lowered height) ─────
+  {
+    file: 'jellyfish.glb',
+    pos: [-12, -8, -200],
+    rot: [0.1, 1.2, 0],
+    scale: [0.012, 0.012, 0.012],
+    animate: (m, t) => {
+      m.position.y = -8 + Math.sin(t * 0.7) * 1.5
+      m.rotation.z = Math.sin(t * 0.4) * 0.06
+    },
+  },
+  {
+    file: 'jellyfish.glb',
+    pos: [12, -5, -208],
+    rot: [-0.1, 2.1, 0.05],
+    scale: [0.014, 0.014, 0.014],
+    animate: (m, t) => {
+      m.position.y = -5 + Math.sin(t * 0.65 + 1.2) * 1.8
+      m.rotation.x = Math.cos(t * 0.35) * 0.05
+    },
+  },
+  {
+    file: 'jellyfish.glb',
+    pos: [-4, -10, -212],
+    rot: [0.05, 0.4, -0.1],
+    scale: [0.01, 0.01, 0.01],
+    animate: (m, t) => {
+      m.position.y = -10 + Math.sin(t * 0.8 + 2.4) * 1.4
+      m.rotation.z = -0.1 + Math.sin(t * 0.5 + 1.0) * 0.05
+    },
+  },
+  {
+    file: 'jellyfish.glb',
+    pos: [6, -6, -218],
+    rot: [-0.08, 3.8, 0.08],
+    scale: [0.013, 0.013, 0.013],
+    animate: (m, t) => {
+      m.position.y = -6 + Math.sin(t * 0.75 + 3.8) * 1.6
+      m.rotation.x = Math.sin(t * 0.4 + 2.0) * 0.06
+    },
+  },
+  {
+    file: 'jellyfish.glb',
+    pos: [-8, -4, -224],
+    rot: [0.12, 4.2, -0.05],
+    scale: [0.0115, 0.0115, 0.0115],
+    animate: (m, t) => {
+      m.position.y = -4 + Math.sin(t * 0.6 + 4.5) * 1.8
+      m.rotation.z = Math.cos(t * 0.45 + 3.0) * 0.05
+    },
+  },
 ]
+
+// Dynamically add plants near every rock (plant02.glb & plant03.glb)
+const rocks = modelConfigs.filter(cfg => cfg.file === 'rocks.glb')
+rocks.forEach((rock, idx) => {
+
+  // Multiple plant02.glb around EVERY rock (large & upside down)
+  const plant02Offsets = [
+    [-3.5, 0, -1.5, 1.8],
+    [3.2, 0, -3.0, 2.2],
+    [-2.8, 0, 3.5, 2.0],
+  ]
+
+  plant02Offsets.forEach(([ox, oy, oz, sc]) => {
+    modelConfigs.push({
+      file: 'plant02.glb',
+      pos: [rock.pos[0] + ox, rock.pos[1] + oy, rock.pos[2] + oz],
+      rot: [Math.PI, Math.random() * Math.PI * 2, Math.PI],
+      scale: [rock.scale[0] * sc, rock.scale[1] * sc, rock.scale[2] * sc],
+      animate: null
+    })
+  })
+
+  // Multiple plant03.glb around EVERY rock (balanced smaller size)
+  const plant03Offsets = [
+    [4.5, 0, 1.8, 0.35],
+    [-4.0, 0, -4.2, 0.4],
+    [1.8, 0, -3.5, 0.3],
+  ]
+
+  plant03Offsets.forEach(([ox, oy, oz, sc]) => {
+    modelConfigs.push({
+      file: 'plant03.glb',
+      pos: [rock.pos[0] + ox, rock.pos[1] + oy, rock.pos[2] + oz],
+      rot: [Math.PI, Math.random() * Math.PI * 2, Math.PI],
+      scale: [rock.scale[0] * sc, rock.scale[1] * sc, rock.scale[2] * sc],
+      animate: null
+    })
+  })
+
+  // Dense plant02.glb & plant03.glb thickets near later rocks (Z < -50)
+  if (rock.pos[2] < -50) {
+    const extraOffsets = [
+      ['plant02.glb', 1.5, 0, -5.5, 2.6],
+      ['plant03.glb', -5.2, 0, 2.0, 0.38],
+      ['plant02.glb', 5.0, 0, -1.2, 2.2],
+      ['plant03.glb', -1.8, 0, -6.0, 0.42],
+    ]
+    extraOffsets.forEach(([file, ox, oy, oz, sc]) => {
+      modelConfigs.push({
+        file,
+        pos: [rock.pos[0] + ox, rock.pos[1] + oy, rock.pos[2] + oz],
+        rot: [Math.PI, Math.random() * Math.PI * 2, Math.PI],
+        scale: [rock.scale[0] * sc, rock.scale[1] * sc, rock.scale[2] * sc],
+        animate: null
+      })
+    })
+  }
+})
+
+
 
 const modelAnimators = []
 
