@@ -2,7 +2,9 @@ import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import Lenis from 'lenis'
 import { gsap } from 'gsap'
+import { initAudio } from './audio.js'
 
+initAudio()
 // ─────────────────────────────────────────────────────────────
 // SCENE SETUP
 // ─────────────────────────────────────────────────────────────

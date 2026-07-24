@@ -1,5 +1,8 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { initAudio } from './audio.js'
+
+initAudio()
 
 // Data for gallery cards using verified Unsplash high-res ocean & marine life images
 const cards = [

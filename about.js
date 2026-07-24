@@ -1,3 +1,6 @@
+import { initAudio } from './audio.js'
+initAudio()
+
 document.addEventListener('DOMContentLoaded', () => {
   // ── MOUSE FOLLOW LIGHT ─────────────────────────
   const mouseLight = document.getElementById('mouseLight')
