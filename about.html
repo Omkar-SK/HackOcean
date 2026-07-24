@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About Us – ABYSS</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="about.css" />
+</head>
+<body class="about-page">
+  <!-- Navigation (mini-navbar) -->
+  <header class="mini-navbar" id="mainNav">
+    <div class="mini-navbar-container">
+      <a href="index.html" class="mini-navbar-logo" style="text-decoration:none">
+        <div class="mini-logo">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <span class="logo-text">ABYSS</span>
+      </a>
+
+      <nav class="mini-navbar-links">
+        <a href="gallery.html" class="anim-link">
+          <div class="anim-link-inner">
+            <span class="anim-link-default">Gallery</span>
+            <span class="anim-link-hover">Gallery</span>
+          </div>
+        </a>
+        <a href="about.html" class="anim-link">
+          <div class="anim-link-inner">
+            <span class="anim-link-default">About Us</span>
+            <span class="anim-link-hover">About Us</span>
+          </div>
+        </a>
+        <a href="contact.html" class="anim-link">
+          <div class="anim-link-inner">
+            <span class="anim-link-default">Contact Us</span>
+            <span class="anim-link-hover">Contact Us</span>
+          </div>
+        </a>
+      </nav>
+
+      <div class="mini-navbar-actions">
+        <div class="signup-button-wrapper">
+          <div class="signup-button-glow"></div>
+          <button class="signup-button" onclick="window.location.href='index.html#panel-cta'">Join Expedition</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- About Content -->
+  <main class="about-main">
+    <div class="about-header">
+      <div class="eyebrow">08 — The Team</div>
+      <h1 class="section-title">About<br/><em>Us</em></h1>
+    </div>
+
+    <!-- 3D Card Container -->
+    <div class="about-cards-container" id="aboutCardsContainer">
+      <!-- Card 1: Kaustubh -->
+      <div class="about-card pos-0" data-variant="pink">
+        <div class="about-card-inner">
+          <div class="card-header">
+            <div class="card-avatar bg-pink">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            </div>
+            <span class="card-name">Kaustubh Guylwade</span>
+          </div>
+          <div class="card-details">
+            <h3 class="card-role">UI/UX Designer</h3>
+            <p class="card-intern">Interning at Google</p>
+          </div>
+          <div class="card-tags">
+            <span>Design</span>
+            <span>Prototyping</span>
+          </div>
+          <div class="card-footer">Creative Lead</div>
+        </div>
+      </div>
+
+      <!-- Card 2: Devesh -->
+      <div class="about-card pos-1" data-variant="blue">
+        <div class="about-card-inner">
+          <div class="card-header">
+            <div class="card-avatar bg-blue">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            </div>
+            <span class="card-name">Devesh Pathak</span>
+          </div>
+          <div class="card-details">
+            <h3 class="card-role">Full Stack Developer</h3>
+            <p class="card-intern">Interning at Microsoft</p>
+          </div>
+          <div class="card-tags">
+            <span>Backend</span>
+            <span>Systems</span>
+          </div>
+          <div class="card-footer">Technical Lead</div>
+        </div>
+      </div>
+
+      <!-- Card 3: Omkar -->
+      <div class="about-card pos-2" data-variant="yellow">
+        <div class="about-card-inner">
+          <div class="card-header">
+            <div class="card-avatar bg-yellow">
+              <svg viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+            </div>
+            <span class="card-name">Omkar Katare</span>
+          </div>
+          <div class="card-details">
+            <h3 class="card-role">3D Graphics Engineer</h3>
+            <p class="card-intern">Interning at Unity</p>
+          </div>
+          <div class="card-tags">
+            <span>Three.js</span>
+            <span>WebGL</span>
+          </div>
+          <div class="card-footer">Graphics Lead</div>
+        </div>
+      </div>
+    </div>
+  </main>
+  
+  <script src="about.js"></script>
+</body>
+</html>
