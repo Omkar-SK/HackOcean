@@ -268,8 +268,8 @@ const sbPos = seabedGeo.attributes.position
 for (let i = 0; i < sbPos.count; i++) {
   const x = sbPos.getX(i)
   const z = sbPos.getZ(i)
-  const dune  = fbm(x * 0.012, z * 0.012) * 5.0
-  const grain = fbm(x * 0.06,  z * 0.06)  * 0.8
+  const dune = fbm(x * 0.012, z * 0.012) * 5.0
+  const grain = fbm(x * 0.06, z * 0.06) * 0.8
   sbPos.setY(i, Math.abs(dune) + grain)
 }
 seabedGeo.computeVertexNormals()
@@ -296,11 +296,11 @@ const pTypes = new Float32Array(PARTICLE_COUNT) // 0=dust, 1=plankton, 2=bubble
 
 for (let i = 0; i < PARTICLE_COUNT; i++) {
   const i3 = i * 3
-  pPositions[i3]     = (Math.random() - 0.5) * 150
+  pPositions[i3] = (Math.random() - 0.5) * 150
   pPositions[i3 + 1] = (Math.random() - 0.5) * 60
   pPositions[i3 + 2] = -100 + Math.random() * 220  // spread across full depth
 
-  pVelocities[i3]     = (Math.random() - 0.5) * 0.003
+  pVelocities[i3] = (Math.random() - 0.5) * 0.003
   pVelocities[i3 + 1] = Math.random() * 0.004 + 0.001
   pVelocities[i3 + 2] = (Math.random() - 0.5) * 0.003
 
@@ -525,9 +525,9 @@ const modelConfigs = [
   // ── Submarine ────────────────────────────────────────
   {
     file: 'submarine.glb',
-    pos: [18, -5, -30],
+    pos: [40, -5, -30],
     rot: [0, -Math.PI * 0.6, 0],
-    scale: [1.2, 1.2, 1.2],
+    scale: [0.9, 0.9, 0.9],
     animate: (m, t) => {
       m.position.y = -5 + Math.sin(t * 0.4) * 0.25
       m.rotation.z = Math.sin(t * 0.3) * 0.02
@@ -541,19 +541,19 @@ const modelConfigs = [
     scale: [0.9, 0.9, 0.9],
     animate: (m, t) => {
       m.position.x = -18 + Math.sin(t * 0.45) * 5
-      m.position.y = -6  + Math.sin(t * 0.65) * 1.5
+      m.position.y = -6 + Math.sin(t * 0.65) * 1.5
       m.rotation.y = 0.8 + Math.sin(t * 0.45) * 0.4
     },
   },
   // ── Rocks on the seabed (scattered along the journey) ─────
-  { file: 'rocks.glb', pos: [ -8, -18, -15], rot: [0, 0.4, 0],  scale: [2,   2,   2  ], animate: null },
-  { file: 'rocks.glb', pos: [ 12, -18, -28], rot: [0, 1.8, 0],  scale: [3,   3,   3  ], animate: null },
-  { file: 'rocks.glb', pos: [-20, -18, -45], rot: [0, 0.9, 0],  scale: [2.5, 2.5, 2.5], animate: null },
-  { file: 'rocks.glb', pos: [ 18, -18, -60], rot: [0, 2.3, 0],  scale: [1.8, 1.8, 1.8], animate: null },
-  { file: 'rocks.glb', pos: [ -5, -18, -75], rot: [0, 1.1, 0],  scale: [3.2, 3.2, 3.2], animate: null },
-  { file: 'rocks.glb', pos: [ 22, -18, -95], rot: [0, 0.3, 0],  scale: [2,   2,   2  ], animate: null },
-  { file: 'rocks.glb', pos: [-15, -18, -110],rot: [0, 1.7, 0],  scale: [2.8, 2.8, 2.8], animate: null },
-  { file: 'rocks.glb', pos: [  8, -18, -130],rot: [0, 2.1, 0],  scale: [2.2, 2.2, 2.2], animate: null },
+  { file: 'rocks.glb', pos: [-8, -18, -15], rot: [0, 0.4, 0], scale: [2, 2, 2], animate: null },
+  { file: 'rocks.glb', pos: [12, -18, -28], rot: [0, 1.8, 0], scale: [3, 3, 3], animate: null },
+  { file: 'rocks.glb', pos: [-20, -18, -45], rot: [0, 0.9, 0], scale: [2.5, 2.5, 2.5], animate: null },
+  { file: 'rocks.glb', pos: [18, -18, -60], rot: [0, 2.3, 0], scale: [1.8, 1.8, 1.8], animate: null },
+  { file: 'rocks.glb', pos: [-5, -18, -75], rot: [0, 1.1, 0], scale: [3.2, 3.2, 3.2], animate: null },
+  { file: 'rocks.glb', pos: [22, -18, -95], rot: [0, 0.3, 0], scale: [2, 2, 2], animate: null },
+  { file: 'rocks.glb', pos: [-15, -18, -110], rot: [0, 1.7, 0], scale: [2.8, 2.8, 2.8], animate: null },
+  { file: 'rocks.glb', pos: [8, -18, -130], rot: [0, 2.1, 0], scale: [2.2, 2.2, 2.2], animate: null },
 ]
 
 const modelAnimators = []
@@ -577,7 +577,7 @@ const FISH_COUNT = 150
 let fishMesh = null
 
 const fishData = Array.from({ length: FISH_COUNT }, () => ({
-  angle: Math.random() * Math.PI * 2,
+  angle: Math.PI * 2,
   radius: 2 + Math.random() * 5,
   yOffset: (Math.random() - 0.5) * 3,
   speed: 0.3 + Math.random() * 0.4,
@@ -593,12 +593,13 @@ const fishDummy = new THREE.Object3D()
 staticLoader.load('/models/fish.glb', (gltf) => {
   let fishGeo = null
   let fishMat = null
-  
+
   gltf.scene.traverse(node => {
     if (node.isMesh && !fishGeo) {
       fishGeo = node.geometry.clone()
       fishGeo.scale(0.0625, 0.0625, 0.0625)
-      fishGeo.rotateY(Math.PI / 2) // 90 degrees
+      fishGeo.rotateY(Math.PI)
+      fishGeo.rotateX(Math.PI / 2)
       fishMat = node.material
     }
   })
@@ -650,31 +651,31 @@ function updateFishSchool(time) {
 
 const waypoints = [
   // 0: Hero — surface, looking down into the blue
-  { progress: 0.00, cam: [0, 10, 20],        target: [0, 5, 0],           depth: 0,    section: 'Surface',           panel: 'panel-hero' },
+  { progress: 0.00, cam: [0, 10, 20], target: [0, 5, 0], depth: 0, section: 'Surface', panel: 'panel-hero' },
   // 1: Descend through surface, approach submarine from the side
-  { progress: 0.10, cam: [-10, 0, -10],      target: [0, -2, -20],        depth: 200,  section: '01 — Submersibles', panel: 'panel-hero' },
+  { progress: 0.10, cam: [-10, 0, -10], target: [0, -2, -20], depth: 200, section: '01 — Submersibles', panel: 'panel-hero' },
   // 2: Submarine — camera is far LEFT, looking RIGHT at sub on the right side
-  { progress: 0.18, cam: [-20, -4, -25],     target: [18, -5, -30],       depth: 480,  section: '01 — Submersibles', panel: 'panel-submarine' },
+  { progress: 0.18, cam: [-20, -4, -25], target: [18, -5, -30], depth: 480, section: '01 — Submersibles', panel: 'panel-submarine' },
   // 3: Slowly orbit past submarine, camera crosses behind
-  { progress: 0.24, cam: [-8, -7, -42],      target: [12, -5, -30],       depth: 700,  section: '01 — Submersibles', panel: 'panel-submarine' },
+  { progress: 0.24, cam: [-8, -7, -42], target: [12, -5, -30], depth: 700, section: '01 — Submersibles', panel: 'panel-submarine' },
   // 4: Coral Reef floor — camera skims low over the reef
-  { progress: 0.32, cam: [-5, -14, -58],     target: [4, -16, -65],       depth: 1000, section: '02 — Coral Forests', panel: 'panel-coral' },
+  { progress: 0.32, cam: [-5, -14, -58], target: [4, -16, -65], depth: 1000, section: '02 — Coral Forests', panel: 'panel-coral' },
   // 5: Fish school — camera on the right looking at school to the left
-  { progress: 0.40, cam: [14, -9, -70],      target: [-6, -10, -80],      depth: 1350, section: '03 — Marine Life',   panel: 'panel-fish' },
+  { progress: 0.40, cam: [14, -9, -70], target: [-6, -10, -80], depth: 1350, section: '03 — Marine Life', panel: 'panel-fish' },
   // 6: Pass through fish school — camera in centre briefly
-  { progress: 0.46, cam: [2, -10, -82],      target: [-8, -9, -92],       depth: 1600, section: '03 — Marine Life',   panel: 'panel-fish' },
+  { progress: 0.46, cam: [2, -10, -82], target: [-8, -9, -92], depth: 1600, section: '03 — Marine Life', panel: 'panel-fish' },
   // 7: Dolphin — camera is very close, right next to dolphin
-  { progress: 0.54, cam: [-10, -5, -96],     target: [-18, -6, -100],     depth: 1900, section: '04 — Cetaceans',     panel: 'panel-dolphin' },
+  { progress: 0.54, cam: [-10, -5, -96], target: [-18, -6, -100], depth: 1900, section: '04 — Cetaceans', panel: 'panel-dolphin' },
   // 8: Whale — camera below-left, looking up-right at whale silhouette above
-  { progress: 0.63, cam: [-8, -14, -122],    target: [25, -6, -135],      depth: 2400, section: '05 — Blue Whale',    panel: 'panel-whale' },
+  { progress: 0.63, cam: [-8, -14, -122], target: [25, -6, -135], depth: 2400, section: '05 — Blue Whale', panel: 'panel-whale' },
   // 9: Pass the whale, diving deeper
-  { progress: 0.70, cam: [5, -16, -142],     target: [0, -15, -155],      depth: 2800, section: '05 — Blue Whale',    panel: 'panel-whale' },
+  { progress: 0.70, cam: [5, -16, -142], target: [0, -15, -155], depth: 2800, section: '05 — Blue Whale', panel: 'panel-whale' },
   // 10: Shipwreck — camera on the right looking at wreck on the left
-  { progress: 0.78, cam: [18, -17, -158],    target: [-16, -18, -165],    depth: 3100, section: '06 — Ghost Fleet',   panel: 'panel-wreck' },
+  { progress: 0.78, cam: [18, -17, -158], target: [-16, -18, -165], depth: 3100, section: '06 — Ghost Fleet', panel: 'panel-wreck' },
   // 11: Abyss — deep dark, floating in the void
-  { progress: 0.88, cam: [0, -17, -182],     target: [0, -18, -195],      depth: 3600, section: '07 — The Abyss',    panel: 'panel-abyss' },
+  { progress: 0.88, cam: [0, -17, -182], target: [0, -18, -195], depth: 3600, section: '07 — The Abyss', panel: 'panel-abyss' },
   // 12: CTA — near total darkness
-  { progress: 1.00, cam: [0, -15, -205],     target: [0, -16, -215],      depth: 3800, section: 'Expedition',         panel: 'panel-cta' },
+  { progress: 1.00, cam: [0, -15, -205], target: [0, -16, -215], depth: 3800, section: 'Expedition', panel: 'panel-cta' },
 ]
 
 function interpolateWaypoints(progress) {
