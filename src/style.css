@@ -385,3 +385,7 @@ footer {
   .hero-card h1 { letter-spacing: -3px; }
   .stat-row { gap: 25px; }
 }
+
+/* WATER ENTRY SECTION */
+.entry-section { align-items: flex-end; padding-bottom: 18vh; }
+
