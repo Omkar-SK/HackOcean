@@ -1045,3 +1045,39 @@ body {
 .heart-btn {
   width: 2.25rem;
 }
+
+/* Mouse Bubble Trail Effect */
+.cursor-bubble {
+  position: fixed;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.95), rgba(144, 224, 239, 0.5) 60%, rgba(0, 119, 182, 0.15));
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 0 10px rgba(144, 224, 239, 0.6), inset 0 0 4px rgba(255, 255, 255, 0.9);
+  z-index: 9999;
+  animation: floatCursorBubble 1.1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+@keyframes floatCursorBubble {
+  0% {
+    opacity: 0.9;
+    transform: translate(-50%, -50%) scale(0.4);
+  }
+  40% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--drift-x, 0px)), calc(-50% - 50px)) scale(1.4);
+  }
+}
+
+/* Gallery Page Very Dark Blue Background */
+body.gallery-page {
+  background-color: #020c1b !important;
+  background: linear-gradient(185deg, #0a192f 0%, #020c1b 50%, #010610 100%) !important;
+}
+
+body.gallery-page #gallery-canvas {
+  background: transparent !important;
+}

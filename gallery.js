@@ -1,28 +1,28 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 
-// Data for gallery cards using Unsplash aquatic/abyss images
+// Data for gallery cards using verified Unsplash high-res ocean & marine life images
 const cards = [
-  { id: 1, url: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=400&q=80', title: 'Deep Sea Diver' },
-  { id: 2, url: 'https://images.unsplash.com/photo-1682687982501-1e5898cb8f4b?auto=format&fit=crop&w=400&q=80', title: 'Coral Reefs' },
-  { id: 3, url: 'https://images.unsplash.com/photo-1518467166778-b88f373ffec7?auto=format&fit=crop&w=400&q=80', title: 'Bioluminescence' },
-  { id: 4, url: 'https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=400&q=80', title: 'Jellyfish Swarm' },
-  { id: 5, url: 'https://images.unsplash.com/photo-1551244072-5d12893278ab?auto=format&fit=crop&w=400&q=80', title: 'Abyssal Plain' },
-  { id: 6, url: 'https://images.unsplash.com/photo-1582967177930-fc8f1e56306b?auto=format&fit=crop&w=400&q=80', title: 'Sunken Ship' },
-  { id: 7, url: 'https://images.unsplash.com/photo-1542281286-9e0a16bb7366?auto=format&fit=crop&w=400&q=80', title: 'Submarine Life' },
-  { id: 8, url: 'https://images.unsplash.com/photo-1498623116890-37e912163d5d?auto=format&fit=crop&w=400&q=80', title: 'Ocean Trench' },
-  { id: 9, url: 'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?auto=format&fit=crop&w=400&q=80', title: 'Whale Shark' },
-  { id: 10, url: 'https://images.unsplash.com/photo-1682687220063-4742bd7fd538?auto=format&fit=crop&w=400&q=80', title: 'Underwater Cave' },
-  { id: 11, url: 'https://images.unsplash.com/photo-1516681100942-77d8e7f9dd97?auto=format&fit=crop&w=400&q=80', title: 'Kelp Forest' },
-  { id: 12, url: 'https://images.unsplash.com/photo-1534080530737-2cd3b5f9db24?auto=format&fit=crop&w=400&q=80', title: 'Deep Sea Vents' },
-  { id: 13, url: 'https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&w=400&q=80', title: 'Sea Turtle' },
-  { id: 14, url: 'https://images.unsplash.com/photo-1506450650965-08e08d66938a?auto=format&fit=crop&w=400&q=80', title: 'Mariana Trench' },
-  { id: 15, url: 'https://images.unsplash.com/photo-1544551763-8dd44758c2dd?auto=format&fit=crop&w=400&q=80', title: 'Ocean Depth' },
-  { id: 16, url: 'https://images.unsplash.com/photo-1517409278479-7973059eb777?auto=format&fit=crop&w=400&q=80', title: 'Squid' },
-  { id: 17, url: 'https://images.unsplash.com/photo-1520690214124-2405c5217146?auto=format&fit=crop&w=400&q=80', title: 'Octopus' },
-  { id: 18, url: 'https://images.unsplash.com/photo-1518099688173-108745d0c75c?auto=format&fit=crop&w=400&q=80', title: 'Stingray' },
-  { id: 19, url: 'https://images.unsplash.com/photo-1493962853295-a4b574212959?auto=format&fit=crop&w=400&q=80', title: 'Manta Ray' },
-  { id: 20, url: 'https://images.unsplash.com/photo-1682687982185-531d09ec56fc?auto=format&fit=crop&w=400&q=80', title: 'Abyss Discovery' }
+  { id: 1, url: 'https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80', title: 'Deep Sea Scuba Expedition' },
+  { id: 2, url: 'https://images.unsplash.com/photo-1544551763-8dd44758c2dd?auto=format&fit=crop&w=600&q=80', title: 'Bioluminescent Jellyfish' },
+  { id: 3, url: 'https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?auto=format&fit=crop&w=600&q=80', title: 'Gentle Whale Shark' },
+  { id: 4, url: 'https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&w=600&q=80', title: 'Ocean Sea Turtle' },
+  { id: 5, url: 'https://images.unsplash.com/photo-1682687982501-1e5898cb8f4b?auto=format&fit=crop&w=600&q=80', title: 'Coral Reef Ecosystem' },
+  { id: 6, url: 'https://images.unsplash.com/photo-1582967177930-fc8f1e56306b?auto=format&fit=crop&w=600&q=80', title: 'Sunken Shipwreck' },
+  { id: 7, url: 'https://images.unsplash.com/photo-1518467166778-b88f373ffec7?auto=format&fit=crop&w=600&q=80', title: 'Deep Sea Creature Glow' },
+  { id: 8, url: 'https://images.unsplash.com/photo-1516681100942-77d8e7f9dd97?auto=format&fit=crop&w=600&q=80', title: 'Lush Kelp Forest' },
+  { id: 9, url: 'https://images.unsplash.com/photo-1520690214124-2405c5217146?auto=format&fit=crop&w=600&q=80', title: 'Giant Pacific Octopus' },
+  { id: 10, url: 'https://images.unsplash.com/photo-1493962853295-a4b574212959?auto=format&fit=crop&w=600&q=80', title: 'Majestic Manta Ray' },
+  { id: 11, url: 'https://images.unsplash.com/photo-1522069169874-c58ec4b76be5?auto=format&fit=crop&w=600&q=80', title: 'Floating Jelly Swarm' },
+  { id: 12, url: 'https://images.unsplash.com/photo-1518099688173-108745d0c75c?auto=format&fit=crop&w=600&q=80', title: 'Stingray Glide' },
+  { id: 13, url: 'https://images.unsplash.com/photo-1534080530737-2cd3b5f9db24?auto=format&fit=crop&w=600&q=80', title: 'Abyssal Thermal Vent' },
+  { id: 14, url: 'https://images.unsplash.com/photo-1506450650965-08e08d66938a?auto=format&fit=crop&w=600&q=80', title: 'Mariana Trench Depth' },
+  { id: 15, url: 'https://images.unsplash.com/photo-1542281286-9e0a16bb7366?auto=format&fit=crop&w=600&q=80', title: 'Deep Submersible Probe' },
+  { id: 16, url: 'https://images.unsplash.com/photo-1682687220063-4742bd7fd538?auto=format&fit=crop&w=600&q=80', title: 'Underwater Cave Exploration' },
+  { id: 17, url: 'https://images.unsplash.com/photo-1517409278479-7973059eb777?auto=format&fit=crop&w=600&q=80', title: 'Deep Ocean Squid' },
+  { id: 18, url: 'https://images.unsplash.com/photo-1551244072-5d12893278ab?auto=format&fit=crop&w=600&q=80', title: 'Abyssal Sea Floor' },
+  { id: 19, url: 'https://images.unsplash.com/photo-1498623116890-37e912163d5d?auto=format&fit=crop&w=600&q=80', title: 'Ocean Sun Rays' },
+  { id: 20, url: 'https://images.unsplash.com/photo-1682687982185-531d09ec56fc?auto=format&fit=crop&w=600&q=80', title: 'Deep Blue Horizon' }
 ]
 
 // ─────────────────────────────────────────────────────────────
@@ -36,7 +36,9 @@ camera.position.set(0, 0, 15)
 const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true })
 renderer.setSize(window.innerWidth, window.innerHeight)
 renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-renderer.setClearColor(0x000000, 1)
+renderer.setClearColor(0x020c1b, 1)
+scene.background = new THREE.Color(0x020c1b)
+scene.fog = new THREE.FogExp2(0x020c1b, 0.015)
 
 // Controls
 const controls = new OrbitControls(camera, renderer.domElement)
@@ -57,23 +59,49 @@ pointLight2.position.set(-10, -10, -10)
 scene.add(pointLight2)
 
 // ─────────────────────────────────────────────────────────────
-// STARFIELD (Glowing Particles)
+// STARFIELD (Glowing Star/Dot Particles)
 // ─────────────────────────────────────────────────────────────
-const starsGeometry = new THREE.BufferGeometry()
-const starsCount = 10000
-const positions = new Float32Array(starsCount * 3)
-for (let i = 0; i < starsCount; i++) {
-  positions[i * 3] = (Math.random() - 0.5) * 2000
-  positions[i * 3 + 1] = (Math.random() - 0.5) * 2000
-  positions[i * 3 + 2] = (Math.random() - 0.5) * 2000
+function createStarTexture() {
+  const canvas = document.createElement('canvas')
+  canvas.width = 64
+  canvas.height = 64
+  const ctx = canvas.getContext('2d')
+
+  const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32)
+  gradient.addColorStop(0, 'rgba(255, 255, 255, 1)')
+  gradient.addColorStop(0.2, 'rgba(224, 247, 250, 0.95)')
+  gradient.addColorStop(0.5, 'rgba(72, 202, 228, 0.6)')
+  gradient.addColorStop(1, 'rgba(0, 0, 0, 0)')
+
+  ctx.fillStyle = gradient
+  ctx.beginPath()
+  ctx.arc(32, 32, 32, 0, Math.PI * 2)
+  ctx.fill()
+
+  return new THREE.CanvasTexture(canvas)
 }
+
+const starsGeometry = new THREE.BufferGeometry()
+const starsCount = 2000
+const positions = new Float32Array(starsCount * 3)
+
+for (let i = 0; i < starsCount; i++) {
+  positions[i * 3] = (Math.random() - 0.5) * 140
+  positions[i * 3 + 1] = (Math.random() - 0.5) * 140
+  positions[i * 3 + 2] = (Math.random() - 0.5) * 140
+}
+
 starsGeometry.setAttribute("position", new THREE.BufferAttribute(positions, 3))
+
 const starsMaterial = new THREE.PointsMaterial({ 
-  color: 0x90e0ef, 
-  size: 0.7, 
+  color: 0xffffff, 
+  size: 0.85, 
+  map: createStarTexture(),
   sizeAttenuation: true, 
   transparent: true, 
-  opacity: 0.6 
+  opacity: 0.9,
+  blending: THREE.AdditiveBlending,
+  depthWrite: false
 })
 const stars = new THREE.Points(starsGeometry, starsMaterial)
 scene.add(stars)
@@ -329,6 +357,11 @@ function animate() {
       hoveredCard = null
       document.body.style.cursor = 'auto'
     }
+  }
+
+  if (stars) {
+    stars.rotation.y += 0.0004
+    stars.rotation.x += 0.00015
   }
 
   controls.update()

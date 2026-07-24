@@ -32,12 +32,40 @@ camera.position.set(-5, 3, -2)
 const cameraTarget = new THREE.Vector3(2, 0, -14)
 camera.lookAt(cameraTarget)
 
-// Mouse parallax state — lazy-tracked for smooth drift
+// Mouse parallax & Cursor bubble trail effect
 let mouseX = 0, mouseY = 0
 let mouseTargetX = 0, mouseTargetY = 0
+let lastBubbleTime = 0
+
+function spawnMouseBubble(x, y) {
+  const bubble = document.createElement('div')
+  bubble.className = 'cursor-bubble'
+  
+  const size = Math.random() * 12 + 8 // 8px to 20px
+  const driftX = (Math.random() - 0.5) * 35
+
+  bubble.style.width = `${size}px`
+  bubble.style.height = `${size}px`
+  bubble.style.left = `${x}px`
+  bubble.style.top = `${y}px`
+  bubble.style.setProperty('--drift-x', `${driftX}px`)
+
+  document.body.appendChild(bubble)
+
+  setTimeout(() => {
+    bubble.remove()
+  }, 1100)
+}
+
 window.addEventListener('mousemove', (e) => {
   mouseTargetX = ((e.clientX / window.innerWidth) - 0.5) * 2
   mouseTargetY = -((e.clientY / window.innerHeight) - 0.5) * 2
+
+  const now = performance.now()
+  if (now - lastBubbleTime > 35) {
+    lastBubbleTime = now
+    spawnMouseBubble(e.clientX, e.clientY)
+  }
 })
 
 // ─────────────────────────────────────────────────────────────
