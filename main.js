@@ -26,10 +26,10 @@ const scene = new THREE.Scene()
 scene.fog = new THREE.FogExp2(0x006994, 0.018)
 
 const camera = new THREE.PerspectiveCamera(65, window.innerWidth / window.innerHeight, 0.1, 300)
-camera.position.set(0, 10, 20)
+camera.position.set(-5, 3, -2)
 
 // Camera lookAt target
-const cameraTarget = new THREE.Vector3(0, 8, 0)
+const cameraTarget = new THREE.Vector3(2, 0, -14)
 camera.lookAt(cameraTarget)
 
 // Mouse parallax state — lazy-tracked for smooth drift
@@ -557,14 +557,14 @@ const modelConfigs = [
       m.rotation.z = Math.sin(t * 0.25) * 0.03
     },
   },
-  // ── Dolphin ────────────────────────────────────────
+  // ── Dolphin (directly in camera path) ─────────────────
   {
     file: 'dolphin.glb',
-    pos: [-18, -6, -90],
+    pos: [-14, -6, -96],
     rot: [0, 0.8, 0],
-    scale: [0.9, 0.9, 0.9],
+    scale: [1.2, 1.2, 1.2],
     animate: (m, t) => {
-      m.position.x = -18 + Math.sin(t * 0.45) * 5
+      m.position.x = -14 + Math.sin(t * 0.45) * 3
       m.position.y = -6 + Math.sin(t * 0.65) * 1.5
       m.rotation.y = 0.8 + Math.sin(t * 0.45) * 0.4
     },
@@ -857,10 +857,10 @@ function updateFishSchool(time) {
 // Shipwreck: placed at [-16, -18, -165]
 
 const waypoints = [
-  // 0: Hero — surface, looking down into the blue
-  { progress: 0.00, cam: [0, 10, 20], target: [0, 5, 0], depth: 0, section: 'Surface', panel: 'panel-hero' },
-  // 1: Descend through surface, approach submarine from the side
-  { progress: 0.10, cam: [-10, 0, -10], target: [0, -2, -20], depth: 200, section: '01 — Submersibles', panel: 'panel-hero' },
+  // 0: Hero — starting upper position
+  { progress: 0.00, cam: [-5, 3, -2], target: [2, 0, -14], depth: 100, section: '01 — Submersibles', panel: 'panel-hero' },
+  // 1: Immediate descent towards submersible depth
+  { progress: 0.08, cam: [-12, -1, -15], target: [8, -3, -25], depth: 300, section: '01 — Submersibles', panel: 'panel-hero' },
   // 2: Submarine — camera is far LEFT, looking RIGHT at sub on the right side
   { progress: 0.18, cam: [-20, -4, -25], target: [18, -5, -30], depth: 480, section: '01 — Submersibles', panel: 'panel-submarine' },
   // 3: Slowly orbit past submarine, camera crosses behind
