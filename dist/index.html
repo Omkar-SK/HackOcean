@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ABYSS – Deep Sea Exploration</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script type="module" crossorigin src="/assets/index-CuJDX3uo.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DXwuKoGs.css">
+</head>
+<body>
+
+  <!-- Canvas -->
+  <canvas id="ocean-canvas"></canvas>
+
+  <!-- Depth HUD -->
+  <div class="depth-hud" id="depthHud">
+    <div class="depth-value" id="depthValue">0m</div>
+    <div class="depth-bar">
+      <div class="depth-fill" id="depthFill"></div>
+    </div>
+    <div class="depth-label">DEPTH</div>
+  </div>
+
+  <!-- Navigation -->
+  <nav class="nav" id="mainNav">
+    <div class="nav-logo">
+      <span class="logo-text">ABYSS</span>
+      <span class="logo-sub">Deep Sea Exploration Co.</span>
+    </div>
+    <div class="nav-center" id="navCenter">
+      <span class="nav-section-name" id="navSectionName">Surface</span>
+    </div>
+    <button class="nav-btn" id="navBook">Book Expedition</button>
+  </nav>
+
+  <!-- Scroll container — drives camera -->
+  <div class="scroll-driver" id="scrollDriver"></div>
+
+  <!-- UI Panels — fixed, appear/disappear as camera moves -->
+
+  <!-- 0: HERO -->
+  <div class="ui-panel visible" id="panel-hero">
+    <div class="panel-inner">
+      <div class="eyebrow">Est. 2009 · Pacific · Indian · Atlantic</div>
+      <h1 class="hero-title">THE DEEP<br/><em>AWAITS</em></h1>
+      <p class="hero-sub">Luxury underwater expeditions to places fewer than 200 humans have ever seen. Scroll to begin your descent.</p>
+      <div class="scroll-hint">
+        <div class="scroll-arrow"></div>
+        <span>SCROLL TO DIVE</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1: SUBMARINE -->
+  <div class="ui-panel panel-right" id="panel-submarine">
+    <div class="panel-inner">
+      <div class="eyebrow">01 — Our Fleet</div>
+      <h2 class="section-title">Deep Sea<br/><em>Submersibles</em></h2>
+      <p class="body-text">Our custom-built research submersibles carry you to depths unreachable by conventional diving. Panoramic viewports. Whisper-quiet electric propulsion. Your window into another world.</p>
+      <div class="fact-row">
+        <div class="fact"><span class="fact-num">3,800m</span><span class="fact-label">Max Depth</span></div>
+        <div class="fact"><span class="fact-num">12hr</span><span class="fact-label">Dive Duration</span></div>
+        <div class="fact"><span class="fact-num">6</span><span class="fact-label">Passengers</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2: CORAL -->
+  <div class="ui-panel panel-left" id="panel-coral">
+    <div class="panel-inner">
+      <div class="eyebrow">02 — Reef Systems</div>
+      <h2 class="section-title">Living<br/><em>Coral Forests</em></h2>
+      <p class="body-text">Descend through ancient coral cathedrals teeming with life. Some colonies here are older than the Roman Empire, growing just 2.5cm per century in perfect silence.</p>
+      <div class="fact-row">
+        <div class="fact"><span class="fact-num">2,000+</span><span class="fact-label">Years Old</span></div>
+        <div class="fact"><span class="fact-num">800+</span><span class="fact-label">Species Present</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3: FISH SCHOOL -->
+  <div class="ui-panel panel-right" id="panel-fish">
+    <div class="panel-inner">
+      <div class="eyebrow">03 — Marine Life</div>
+      <h2 class="section-title">Schools of<br/><em>Thousands</em></h2>
+      <p class="body-text">Moving as one fluid organism, schools of yellowfin tuna and jack surround the submersible. A swirling vortex of silver and gold — one of nature's most breathtaking performances.</p>
+      <div class="fact-row">
+        <div class="fact"><span class="fact-num">50,000+</span><span class="fact-label">Fish Per School</span></div>
+        <div class="fact"><span class="fact-num">60km/h</span><span class="fact-label">Top Speed</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4: DOLPHINS -->
+  <div class="ui-panel panel-left" id="panel-dolphin">
+    <div class="panel-inner">
+      <div class="eyebrow">04 — Cetaceans</div>
+      <h2 class="section-title">Dolphin<br/><em>Encounters</em></h2>
+      <p class="body-text">Spinner dolphins regularly escort our vessels, performing aerial acrobatics that leave every guest speechless. Their curiosity about us is as genuine as ours about them.</p>
+      <div class="fact-row">
+        <div class="fact"><span class="fact-num">300</span><span class="fact-label">Pod Size</span></div>
+        <div class="fact"><span class="fact-num">20</span><span class="fact-label">Spins Per Jump</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5: WHALE -->
+  <div class="ui-panel panel-center" id="panel-whale">
+    <div class="panel-inner panel-inner-center">
+      <div class="eyebrow">05 — The Giants</div>
+      <h2 class="section-title" style="text-align:center">Blue Whale<br/><em>Migration</em></h2>
+      <p class="body-text" style="text-align:center;max-width:500px">The largest animal ever to exist on Earth. Encountering a blue whale at depth — hearing its infrasonic song reverberating through the hull — is a moment that redefines awe.</p>
+      <div class="fact-row" style="justify-content:center">
+        <div class="fact"><span class="fact-num">33m</span><span class="fact-label">Length</span></div>
+        <div class="fact"><span class="fact-num">180T</span><span class="fact-label">Weight</span></div>
+        <div class="fact"><span class="fact-num">1,600km</span><span class="fact-label">Song Range</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 6: SHIPWRECK -->
+  <div class="ui-panel panel-right" id="panel-wreck">
+    <div class="panel-inner">
+      <div class="eyebrow">06 — History</div>
+      <h2 class="section-title">Ghost Fleet<br/><em>Expedition</em></h2>
+      <p class="body-text">WWII vessels now transformed into artificial reefs. Steel corridors colonised by black coral. Gun turrets draped in soft coral fans. History reclaimed by the sea.</p>
+      <div class="fact-row">
+        <div class="fact"><span class="fact-num">500m</span><span class="fact-label">Resting Depth</span></div>
+        <div class="fact"><span class="fact-num">80yr</span><span class="fact-label">On The Bottom</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7: ABYSS -->
+  <div class="ui-panel panel-center" id="panel-abyss">
+    <div class="panel-inner panel-inner-center">
+      <div class="eyebrow">07 — The Deep</div>
+      <h2 class="section-title abyss-title" style="text-align:center"><em>The Abyss</em></h2>
+      <p class="body-text" style="text-align:center;max-width:480px">Below 2,000 meters lies a world of perpetual darkness where life glows from within. Creatures never touched by sunlight. Pressure that would crush steel. And a silence so complete it has a texture.</p>
+    </div>
+  </div>
+
+  <!-- 8: CTA -->
+  <div class="ui-panel panel-center" id="panel-cta">
+    <div class="panel-inner panel-inner-center">
+      <div class="eyebrow">Begin Your Journey</div>
+      <h2 class="section-title" style="text-align:center">Ready to<br/><em>Descend?</em></h2>
+      <p class="body-text" style="text-align:center;max-width:440px">Our expedition specialists craft personalised underwater experiences for those who seek the extraordinary. 48-hour response guaranteed.</p>
+      <div class="cta-buttons">
+        <button class="btn-primary" id="ctaBook">Request Expedition</button>
+        <a class="btn-ghost" href="mailto:explore@abyss.co">explore@abyss.co</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Booking Modal -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <button class="modal-close" id="modalClose">✕</button>
+      <div class="modal-header">
+        <div class="eyebrow">Private Consultation</div>
+        <h3 class="modal-title">Reserve Your<br/><em>Expedition</em></h3>
+      </div>
+      <form class="modal-form" id="bookingForm">
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" placeholder="Alexander" required />
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" placeholder="Voss" required />
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" placeholder="explorer@email.com" required />
+        </div>
+        <div class="form-group">
+          <label>Expedition Interest</label>
+          <select>
+            <option>Midnight Zone Descent</option>
+            <option>Blue Whale Migration</option>
+            <option>Coral Renaissance</option>
+            <option>Ghost Fleet</option>
+            <option>Private Charter</option>
+            <option>Custom Expedition</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Tell us your dream</label>
+          <textarea rows="3" placeholder="Describe your ideal underwater experience..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary" style="width:100%;margin-top:8px">Submit Request</button>
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>
