@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ABYSS — Cinematic Deep Sea Exploration Experience" />
+  <title>ABYSS | Deep Sea Exploration</title>
+</head>
+<body>
+
+  <!-- THREE.JS CANVAS -->
+  <canvas id="webgl"></canvas>
+
+  <!-- LOADING SCREEN -->
+  <div id="loader">
+    <div class="loader-content">
+      <div class="loader-logo">ABYSS</div>
+      <div class="loader-line">
+        <div class="loader-progress"></div>
+      </div>
+      <div class="loader-text">INITIALIZING DEEP SEA SYSTEMS</div>
+    </div>
+  </div>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <a class="brand" href="#surface">
+      ABYSS
+      <span>DEEP SEA EXPLORATION CO.</span>
+    </a>
+    <nav>
+      <a href="#mission">MISSION</a>
+      <a href="#expedition">EXPEDITIONS</a>
+      <a href="#contact">CONTACT</a>
+    </nav>
+  </header>
+
+  <!-- DEPTH HUD -->
+  <div class="depth-hud">
+    <span class="depth-label">DEPTH</span>
+    <div class="depth-value">
+      <span id="depth">0000</span>
+      <span class="depth-unit">M</span>
+    </div>
+    <div class="depth-line"></div>
+    <span id="zone-name" class="zone-name">SURFACE</span>
+  </div>
+
+  <!-- SIDE DEPTH INDICATOR -->
+  <div class="depth-track">
+    <div class="depth-track-line">
+      <div id="depth-track-progress"></div>
+    </div>
+    <span>0M</span>
+    <span>200M</span>
+    <span>1000M</span>
+    <span>4000M</span>
+    <span>6000M</span>
+  </div>
+
+  <!-- SCROLL STORY -->
+  <main>
+
+    <!-- HERO -->
+    <section id="surface" class="story-section hero-section">
+      <div class="story-card hero-card">
+        <p class="eyebrow">THE OCEAN'S FINAL FRONTIER</p>
+        <h1>DESCEND <span>BEYOND</span> THE KNOWN</h1>
+        <p class="description">
+          Journey into a world untouched by sunlight.
+          Explore Earth's last great frontier aboard
+          next-generation deep-sea vessels.
+        </p>
+        <a href="#mission" class="explore-button">
+          BEGIN DESCENT <span>↓</span>
+        </a>
+      </div>
+      <div class="scroll-indicator">
+        <span>SCROLL TO DESCEND</span>
+        <div class="mouse"><div></div></div>
+      </div>
+    </section>
+
+    <!-- SUNLIGHT ZONE -->
+    <section id="mission" class="story-section">
+      <div class="story-card left-card">
+        <p class="chapter">01 / SUNLIGHT ZONE</p>
+        <h2>LEAVE THE <span>SURFACE</span></h2>
+        <p>
+          As sunlight fades behind you, ABYSS begins its descent into an alien
+          world hidden beneath kilometers of ocean.
+        </p>
+        <div class="stat-row">
+          <div><strong>200M</strong><span>SUNLIGHT LIMIT</span></div>
+          <div><strong>98%</strong><span>OCEAN UNEXPLORED</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TWILIGHT -->
+    <section class="story-section">
+      <div class="story-card right-card">
+        <p class="chapter">02 / TWILIGHT ZONE</p>
+        <h2>WHERE LIGHT <span>DISAPPEARS</span></h2>
+        <p>
+          Enter the mesopelagic frontier. Strange lifeforms emerge from darkness
+          while our exploration vessel scans an environment few humans have ever witnessed.
+        </p>
+        <div class="tech-tag">ABYSS // NAVIGATION ACTIVE</div>
+      </div>
+    </section>
+
+    <!-- MIDNIGHT -->
+    <section class="story-section">
+      <div class="story-card left-card">
+        <p class="chapter">03 / MIDNIGHT ZONE</p>
+        <h2>LIFE CREATES <span>ITS OWN LIGHT</span></h2>
+        <p>
+          Beyond 1,000 meters, sunlight no longer exists. Bioluminescent organisms
+          transform total darkness into a living constellation.
+        </p>
+        <div class="stat-row">
+          <div><strong>0%</strong><span>SUNLIGHT</span></div>
+          <div><strong>1000+</strong><span>SPECIES OBSERVED</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHIPWRECK -->
+    <section id="expedition" class="story-section">
+      <div class="story-card right-card">
+        <p class="chapter">04 / DISCOVERY SITE</p>
+        <h2>HISTORY SLEEPS <span>BELOW</span></h2>
+        <p>
+          Lost vessels, forgotten ecosystems and geological formations wait in silence.
+          Every ABYSS expedition enters territory where discovery is still possible.
+        </p>
+        <button class="glass-button">EXPLORE EXPEDITIONS</button>
+      </div>
+    </section>
+
+    <!-- ABYSSAL -->
+    <section class="story-section abyss-section">
+      <div class="story-card centered-card">
+        <p class="chapter">05 / ABYSSAL PLAIN</p>
+        <h2>WELCOME TO <span>THE ABYSS</span></h2>
+        <p>
+          Six kilometers beneath the world you know, pressure becomes crushing,
+          darkness absolute, and exploration becomes something extraordinary.
+        </p>
+        <div class="coordinates">34°42' N &nbsp;&nbsp; 28°19' W</div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="contact" class="story-section final-section">
+      <div class="final-content">
+        <p class="eyebrow">YOUR DESCENT BEGINS HERE</p>
+        <h2>HOW DEEP<br />WILL YOU GO?</h2>
+        <p>
+          Join a new generation of explorers and experience
+          Earth's most inaccessible frontier.
+        </p>
+        <button class="cta-button">RESERVE AN EXPEDITION <span>↗</span></button>
+      </div>
+      <footer>
+        <div>ABYSS © 2026</div>
+        <div>EXPLORE THE UNKNOWN</div>
+      </footer>
+    </section>
+
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
