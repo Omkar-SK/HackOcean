@@ -774,7 +774,9 @@ function updateScrollState() {
 
   // Update Nav Section Name & Panel Visibility
   const currentWp = waypoints[state.activeWaypointIndex]
-  navSectionNameEl.textContent = currentWp.section
+  if (navSectionNameEl) {
+    navSectionNameEl.textContent = currentWp.section
+  }
 
   allPanels.forEach(panel => {
     if (panel.id === currentWp.panel) {
@@ -799,6 +801,7 @@ function updateScrollState() {
 
 const modalOverlay = document.getElementById('modalOverlay')
 const navBookBtn = document.getElementById('navBook')
+const navBookMobileBtn = document.getElementById('navBookMobile')
 const ctaBookBtn = document.getElementById('ctaBook')
 const modalCloseBtn = document.getElementById('modalClose')
 const bookingForm = document.getElementById('bookingForm')
@@ -807,8 +810,28 @@ function openModal() { modalOverlay.classList.add('open') }
 function closeModal() { modalOverlay.classList.remove('open') }
 
 if (navBookBtn) navBookBtn.addEventListener('click', openModal)
+if (navBookMobileBtn) navBookMobileBtn.addEventListener('click', openModal)
 if (ctaBookBtn) ctaBookBtn.addEventListener('click', openModal)
 if (modalCloseBtn) modalCloseBtn.addEventListener('click', closeModal)
+
+// Mobile Menu Toggle
+const mobileMenuToggle = document.getElementById('mobileMenuToggle')
+const mainNav = document.getElementById('mainNav')
+const menuIconOpen = document.getElementById('menuIconOpen')
+const menuIconClose = document.getElementById('menuIconClose')
+
+if (mobileMenuToggle) {
+  mobileMenuToggle.addEventListener('click', () => {
+    const isOpen = mainNav.classList.toggle('open')
+    if (isOpen) {
+      menuIconOpen.classList.add('hidden')
+      menuIconClose.classList.remove('hidden')
+    } else {
+      menuIconOpen.classList.remove('hidden')
+      menuIconClose.classList.add('hidden')
+    }
+  })
+}
 
 if (modalOverlay) {
   modalOverlay.addEventListener('click', (e) => {

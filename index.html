@@ -24,16 +24,61 @@
   </div>
 
   <!-- Navigation -->
-  <nav class="nav" id="mainNav">
-    <div class="nav-logo">
-      <span class="logo-text">ABYSS</span>
-      <span class="logo-sub">Deep Sea Exploration Co.</span>
+  <header class="mini-navbar" id="mainNav">
+    <div class="mini-navbar-container">
+      <div class="mini-navbar-logo">
+        <div class="mini-logo">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <span class="logo-text">ABYSS</span>
+      </div>
+
+      <nav class="mini-navbar-links">
+        <a href="gallery.html" class="anim-link">
+          <div class="anim-link-inner">
+            <span class="anim-link-default">Gallery</span>
+            <span class="anim-link-hover">Gallery</span>
+          </div>
+        </a>
+        <a href="#about" class="anim-link">
+          <div class="anim-link-inner">
+            <span class="anim-link-default">About Us</span>
+            <span class="anim-link-hover">About Us</span>
+          </div>
+        </a>
+        <a href="contact.html" class="anim-link">
+          <div class="anim-link-inner">
+            <span class="anim-link-default">Contact Us</span>
+            <span class="anim-link-hover">Contact Us</span>
+          </div>
+        </a>
+      </nav>
+
+      <div class="mini-navbar-actions">
+        <div class="signup-button-wrapper">
+          <div class="signup-button-glow"></div>
+          <button class="signup-button" id="navBook">Join Expedition</button>
+        </div>
+      </div>
+
+      <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Open Menu">
+        <svg id="menuIconOpen" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        <svg id="menuIconClose" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
     </div>
-    <div class="nav-center" id="navCenter">
-      <span class="nav-section-name" id="navSectionName">Surface</span>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <nav class="mobile-nav-links">
+        <a href="gallery.html">Gallery</a>
+        <a href="#about">About Us</a>
+        <a href="contact.html">Contact Us</a>
+      </nav>
+      <div class="mobile-nav-actions">
+        <button class="signup-button" id="navBookMobile">Join Expedition</button>
+      </div>
     </div>
-    <button class="nav-btn" id="navBook">Book Expedition</button>
-  </nav>
+  </header>
 
   <!-- Scroll container — drives camera -->
   <div class="scroll-driver" id="scrollDriver"></div>
